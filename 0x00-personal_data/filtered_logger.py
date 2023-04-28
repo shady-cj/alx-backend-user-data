@@ -51,7 +51,7 @@ class RedactingFormatter(logging.Formatter):
         return super().format(record)
 
 
-PII_FIELDS = ("email", "phone", "ssn", "password", "ip")
+PII_FIELDS = ("name", "phone", "ssn", "password", "ip")
 
 
 def get_logger() -> logging.Logger:
