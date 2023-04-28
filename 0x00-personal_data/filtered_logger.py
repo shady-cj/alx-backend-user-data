@@ -4,9 +4,11 @@ This module contains a function named filter_datum
 that returns the log message obfuscated:
 """
 import re
+import typing
 
 
-def filter_datum(fields, redaction, message, separator):
+def filter_datum(fields: typing.List[str], redaction: str,
+                 message: str, separator: str) -> str:
     """
     The function uses a regex to replace occurrences
     of certain field values and
