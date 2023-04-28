@@ -51,10 +51,13 @@ class RedactingFormatter(logging.Formatter):
         return super().format(record)
 
 
-PII_FIELDS = ('email', 'ssn', 'password', 'ip', 'phone')
+PII_FIELDS = ("email", "phone", "ssn", "password", "ip")
 
 
 def get_logger() -> logging.Logger:
+    """
+    Returns a logger
+    """
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
     stream_handler = logging.StreamHandler()
