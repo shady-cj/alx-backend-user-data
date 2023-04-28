@@ -107,3 +107,42 @@ bob@dylan:~$
 
 
 **File**: `filtered_logger.py`
+
+
+
+
+### 2. Create logger
+
+Use `user_data.csv` for this task
+
+Implement a `get_logger` function that takes no arguments and returns a `logging.Logger` object.
+
+The logger should be named "user_data" and only log up to logging.INFO level. It should not propagate messages to other loggers. It should have a StreamHandler with RedactingFormatter as formatter.
+
+Create a tuple PII_FIELDS constant at the root of the module containing the fields from user_data.csv that are considered PII. PII_FIELDS can contain only 5 fields - choose the right list of fields that can are considered as “important” PIIs or information that you must hide in your logs. Use it to parameterize the formatter.
+
+
+```
+bob@dylan:~$ cat main.py
+#!/usr/bin/env python3
+"""
+Main file
+"""
+
+import logging
+
+get_logger = __import__('filtered_logger').get_logger
+PII_FIELDS = __import__('filtered_logger').PII_FIELDS
+
+print(get_logger.__annotations__.get('return'))
+print("PII_FIELDS: {}".format(len(PII_FIELDS)))
+
+bob@dylan:~$
+bob@dylan:~$ ./main.py
+<class 'logging.Logger'>
+PII_FIELDS: 5
+bob@dylan:~$
+```
+
+
+**File**: `filtered_logger.py`
