@@ -97,15 +97,19 @@ def main():
     for row in cursor:
         message = "name={}; email={}; phone={}; ssn={}; \
 password={}; ip={}; last_login={}; user_agent={};".format(
+                                                    row[0],
                                                     row[1],
                                                     row[2],
                                                     row[3],
                                                     row[4],
                                                     row[5],
                                                     row[6],
-                                                    row[7],
-                                                    row[8]
+                                                    row[7]
                                                     )
         logger.info(message)
     cursor.close()
     db.close()
+
+
+if __name__ == "__main__":
+    main()
