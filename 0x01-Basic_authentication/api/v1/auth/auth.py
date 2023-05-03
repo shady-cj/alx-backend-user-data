@@ -14,7 +14,13 @@ class Auth:
         """
         Handlers that defines if auth is required or not.
         """
-        return False
+        if path is None or \
+           excluded_paths is None or len(excluded_paths) == 0:
+            return True
+        for p in excluded_paths:
+            if p.rstrip('/') == path.rstrip("/"):
+                return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """
