@@ -7,6 +7,9 @@ from typing import List, TypeVar
 
 
 class Auth:
+    """
+        Defining the main authentication class
+    """
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
         Handlers that defines if auth is required or not.
