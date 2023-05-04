@@ -21,8 +21,12 @@ class Auth:
         path = path.rstrip('/')
         for p in excluded_paths:
             p = p.rstrip('/')
-            
-            if re.search(r'{}'.format(p), path):
+            if "*" in p:
+                ind = p.find('*')
+                list_p = list(p)
+                list_p.insert(ind, ".")
+                p = "".join(list_p)
+            if re.search(r'^{}$'.format(p), path):
                 return False
         return True
 
