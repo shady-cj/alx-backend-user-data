@@ -4,6 +4,7 @@ Implementing an authentication system
 """
 from flask import request
 from typing import List, TypeVar
+import re
 
 
 class Auth:
@@ -17,8 +18,11 @@ class Auth:
         if path is None or \
            excluded_paths is None or len(excluded_paths) == 0:
             return True
+        path = path.rstrip('/')
         for p in excluded_paths:
-            if p.rstrip('/') == path.rstrip("/"):
+            p = p.rstrip('/')
+            
+            if re.search(r'{}'.format(p), path):
                 return False
         return True
 
