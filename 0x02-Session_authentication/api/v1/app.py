@@ -61,12 +61,13 @@ def before_request_handler():
                              [
                                 "/api/v1/status/",
                                 "/api/v1/unauthorized/",
-                                "/api/v1/forbidden/"
+                                "/api/v1/forbidden/",
+                                "/api/v1/auth_session/login/"
                               ]):
         return None
-    if auth.authorization_header(request) is None:
+    if auth.authorization_header(request) is None and\
+       auth.session_cookie(request) is None:
         abort(401)
-
     if auth.current_user(request) is None:
         abort(403)
     request.current_user = auth.current_user(request)
