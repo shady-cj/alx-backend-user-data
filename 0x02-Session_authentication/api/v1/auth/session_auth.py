@@ -28,6 +28,6 @@ class SessionAuth(Auth):
         """
          returns a User ID based on a Session ID:
         """
-        if user_id is None or type(user_id) != str:
+        if session_id is None or type(session_id) != str:
             return None
         return self.user_id_by_session_id.get(session_id)
