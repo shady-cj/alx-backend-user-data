@@ -37,6 +37,10 @@ class SessionAuth(Auth):
         """
         returns a User instance based on a cookie value:
         """
+        if request is None:
+            return None
         get_cookie = self.session_cookie(request)
         user_id = self.user_id_for_session_id(get_cookie)
+        if user_id is None:
+            return None
         return User.get(user_id)
