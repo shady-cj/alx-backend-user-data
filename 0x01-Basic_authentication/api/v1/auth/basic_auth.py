@@ -54,7 +54,9 @@ class BasicAuth(Auth):
            decoded_base64_authorization_header is not None:
             if ":" in decoded_base64_authorization_header:
                 token = decoded_base64_authorization_header
-                email, password = token.split(':')
+                cred = token.split(':')
+                email = cred[0]
+                password = ':'.join(cred[1:])
                 return email, password
         return None, None
 
