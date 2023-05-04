@@ -3,7 +3,9 @@
 Implementing a basic authentication system
 """
 from api.v1.auth.auth import Auth
+from models.user import User
 import base64
+from typing import TypeVar
 
 
 class BasicAuth(Auth):
@@ -55,3 +57,21 @@ class BasicAuth(Auth):
                 email, password = token.split(':')
                 return email, password
         return None, None
+
+    def user_object_from_credentials(self,
+                                     user_email: str,
+                                     user_pwd: str
+                                     ) -> TypeVar('User'):
+        """
+         returns the User instance based on his email and password.
+        """
+        if user_email is None or type(user_email) != str:
+            return None
+        if user_pwd is None or type(user_pwd) != str:
+            return None
+        results = User.search({"email": user_email})
+        if len(results) == 0:
+            return None
+        for user in results:
+            if user.is_valid_password(user_pwd):
+                return user
