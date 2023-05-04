@@ -10,4 +10,15 @@ class BasicAuth(Auth):
     Basic Authentication system that inherits
     from the Auth system
     """
-    pass
+
+    def extract_base64_authorization_header(self,
+                                            authorization_header: str) -> str:
+        """
+        Extracts the base64 basic auth token
+        """
+        if type(authorization_header) == str and\
+           authorization_header is not None:
+            if authorization_header.startswith('Basic '):
+                return authorization_header.lstrip('Basic ')
+
+        return None
