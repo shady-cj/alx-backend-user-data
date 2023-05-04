@@ -10,6 +10,9 @@ from os import getenv
 
 @app_views.route('/auth_session/login', methods=["POST"], strict_slashes=False)
 def login_handler():
+    """
+    Implemented a login view
+    """
     email = request.form.get("email")
     password = request.form.get("password")
     if email is None:
