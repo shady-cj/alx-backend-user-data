@@ -5,6 +5,7 @@ based on Session ID stored in database(in-memory file)
 """
 from .session_exp_auth import SessionExpAuth
 from models.user_session import UserSession
+from datetime import datetime
 
 
 class SessionDBAuth(SessionExpAuth):
@@ -35,6 +36,12 @@ class SessionDBAuth(SessionExpAuth):
         if len(sessions) == 0:
             return None
         session = sessions[0]
+        now = datetime.now()
+        created_at = session.created_at
+        total_secs = created_at.timestamp() + self.session_duration
+        if now.timestamp() > total_secs:
+            session.remove()
+            return None
         return session.user_id
     
     def destroy_session(self, request=None):
