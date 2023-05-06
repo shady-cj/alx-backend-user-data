@@ -22,7 +22,6 @@ class Base():
         s_class = str(self.__class__.__name__)
         if DATA.get(s_class) is None:
             DATA[s_class] = {}
-
         self.id = kwargs.get('id', str(uuid.uuid4()))
         if kwargs.get('created_at') is not None:
             self.created_at = datetime.strptime(kwargs.get('created_at'),

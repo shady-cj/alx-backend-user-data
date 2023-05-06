@@ -4,7 +4,7 @@ Creating a User class
 putting into consideration the user's
 session.
 """
-from .base import Base
+from models.base import Base
 
 
 class UserSession(Base):

@@ -7,7 +7,7 @@ from .session_exp_auth import SessionExpAuth
 from models.user_session import UserSession
 
 
-class SessionDbAuth(SessionExpAuth):
+class SessionDBAuth(SessionExpAuth):
     """
     Creating a session authentication with
     in-memory file storage.
