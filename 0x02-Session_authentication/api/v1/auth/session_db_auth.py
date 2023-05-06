@@ -25,14 +25,18 @@ class SessionDBAuth(SessionExpAuth):
         user_session = UserSession(user_id=user_id, session_id=session_id)
         user_session.save()
         return session_id
-    
+
     def user_id_for_session_id(self, session_id=None):
         """
-         returns the User ID by requesting UserSession in the database based on session_id
+         returns the User ID by requesting UserSession in
+        the database based on session_id
         """
         if session_id is None:
             return None
-        sessions = UserSession.search({"session_id": session_id})
+        try:
+            sessions = UserSession.search({"session_id": session_id})
+        except Exception as e:
+            return None
         if len(sessions) == 0:
             return None
         session = sessions[0]
@@ -43,10 +47,11 @@ class SessionDBAuth(SessionExpAuth):
             session.remove()
             return None
         return session.user_id
-    
+
     def destroy_session(self, request=None):
         """
-        destroys the UserSession based on the Session ID from the request cookie
+        destroys the UserSession based on the
+        Session ID from the request cookie
         """
         super().destroy_session()
         if request is None:
