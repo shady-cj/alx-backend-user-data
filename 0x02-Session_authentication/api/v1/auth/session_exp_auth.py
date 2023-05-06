@@ -20,7 +20,7 @@ class SessionExpAuth(SessionAuth):
         """
         try:
             self.session_duration = int(getenv("SESSION_DURATION", 0))
-        except:
+        except Exception as e:
             self.session_duration = 0
 
     def create_session(self, user_id: str = None) -> str:
@@ -38,7 +38,7 @@ class SessionExpAuth(SessionAuth):
         }
         self.__class__.user_id_by_session_id[session_id] = session_dict
         return session_id
-    
+
     def user_id_for_session_id(self, session_id=None):
         """
         Return the user_id based on the
