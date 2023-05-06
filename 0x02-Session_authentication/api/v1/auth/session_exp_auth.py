@@ -54,7 +54,7 @@ class SessionExpAuth(SessionAuth):
         created_at = session_info.get("created_at")
         if created_at is None:
             return None
-        now = datetime.datetime.now()
+        now = datetime.now()
         total_secs = created_at.timestamp() + self.session_duration
         if now.timestamp() < total_secs:
             return None
