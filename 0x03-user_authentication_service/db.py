@@ -56,7 +56,10 @@ class DB:
         method that takes as argument a required user_id integer and
         arbitrary keyword arguments, and returns None
         """
-        user = self.find_user_by(id=user_id)
+        try:
+            user = self.find_user_by(id=user_id)
+        except NoResultFound:
+            return None
         valid_attrs = list(user.__dict__.keys())
         for k, v in kwargs.items():
             if k in valid_attrs and k != '_sa_instance_state':

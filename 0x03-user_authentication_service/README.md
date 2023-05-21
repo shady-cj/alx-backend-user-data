@@ -564,3 +564,13 @@ In this task, you will implement the Auth.get_user_from_session_id method. It ta
 If the session ID is None or no user is found, return None. Otherwise return the corresponding user.
 
 Remember to only use public methods of self._db.
+
+
+
+
+### 13. Destroy session
+In this task, you will implement Auth.destroy_session. The method takes a single user_id integer argument and returns None.
+
+The method updates the corresponding user’s session ID to None.
+
+Remember to only use public methods of self._db.
