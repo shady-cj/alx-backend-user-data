@@ -50,3 +50,18 @@ class DB:
         if u is None:
             raise NoResultFound
         return u
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """
+        method that takes as argument a required user_id integer and
+        arbitrary keyword arguments, and returns None
+        """
+        user = self.find_user_by(id=user_id)
+        valid_attrs = list(user.__dict__.keys())
+        for k, v in kwargs.items():
+            if k in valid_attrs and k != '_sa_instance_state':
+                setattr(user, k, v)
+            else:
+                raise ValueError
+        self._session.commit()
+        return None
