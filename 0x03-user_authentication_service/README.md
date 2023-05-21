@@ -210,3 +210,30 @@ bob@dylan:~$ python3 main.py
 Password updated
 bob@dylan:~$ 
 ```
+
+
+
+### 4. Hash password
+
+In this task you will define a `_hash_password` method that takes in a password string arguments and returns bytes.
+
+The returned bytes is a salted hash of the input password, hashed with `bcrypt.hashpw`.
+
+```
+bob@dylan:~$ cat main.py
+#!/usr/bin/env python3
+"""
+Main file
+"""
+from auth import _hash_password
+
+print(_hash_password("Hello Holberton"))
+
+bob@dylan:~$ python3 main.py
+b'$2b$12$eUDdeuBtrD41c8dXvzh95ehsWYCCAi4VH1JbESzgbgZT.eMMzi.G2'
+bob@dylan:~$
+```
+
+**File**: `auth.py`
+
+
