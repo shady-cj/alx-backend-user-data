@@ -6,10 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from sqlalchemy.orm.exc import NoResultFound
-from user import User
-from typing import Dict
-
-from user import Base
+from user import Base, User
 
 
 class DB:
@@ -42,7 +39,7 @@ class DB:
         self._session.commit()
         return new_user
 
-    def find_user_by(self, **kwargs: Dict[str, any]) -> User:
+    def find_user_by(self, **kwargs) -> User:
         """
         This method takes in arbitrary keyword arguments and returns
         the first row found in the users table as filtered by the
