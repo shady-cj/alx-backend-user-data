@@ -3,6 +3,7 @@
 Contains utility authentication functions and classes
 """
 
+import uuid
 import bcrypt
 from db import DB
 from sqlalchemy.orm.exc import NoResultFound
@@ -16,6 +17,13 @@ def _hash_password(password: str) -> bytes:
     """
     hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
     return hashed
+
+
+def _generate_uuid():
+    """
+    The function should return a string representation of a new UUID.
+    """
+    return str(uuid.uuid4())
 
 
 class Auth:
