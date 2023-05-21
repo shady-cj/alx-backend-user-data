@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
+from sqlalchemy.orm.exc import NoResultFound
 from user import User
 
 from user import Base
@@ -37,5 +38,17 @@ class DB:
         """
         new_user = User(email=email, hashed_password=hashed_password)
         self._session.add(new_user)
-        u = self._session.query(User).filter_by(email=email).first()
+        self._session.commit()
+        return new_user
+
+    def find_user_by(self, **kwargs: dict[str, any]) -> User:
+        """
+        This method takes in arbitrary keyword arguments and returns
+        the first row found in the users table as filtered by the
+        method’s input arguments.
+        """
+
+        u = self._session.query(User).filter_by(**kwargs).first()
+        if u is None:
+            raise NoResultFound
         return u
