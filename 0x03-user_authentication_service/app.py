@@ -3,7 +3,7 @@
 Creating a flask application to serve
 the authentication service
 """
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, abort
 from auth import Auth
 
 app = Flask(__name__)
@@ -30,6 +30,23 @@ def users():
         return jsonify({"email": user.email, "message": "user created"})
     except ValueError:
         return jsonify({"message": "email already registered"}), 400
+
+
+@app.route("/sessions", methods=["POST"])
+def login():
+    """
+    Handles the login functionality
+    """
+    email = request.form.get('email')
+    password = request.form.get('password')
+    user = AUTH.valid_login(email, password)
+    if user:
+        session_id = AUTH.create_session(email)
+        resp = jsonify({"email": email, "message": "logged in"})
+        resp.set_cookie("session_id", session_id)
+        return resp
+    else:
+        abort(401)
 
 
 if __name__ == "__main__":
